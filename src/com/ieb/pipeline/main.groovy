@@ -1,3 +1,5 @@
-@Library("pipelib") _
+package com.ieb.pipeline;
 
-node { new com.ieb.pipeline.Builder().build() }
+void build() {
+    echo "Testing library"
+}
