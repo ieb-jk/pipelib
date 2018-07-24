@@ -1,5 +1,5 @@
 package com.ieb.pipeline;
 
-void build() {
+def build() {
     echo "Testing library"
 }
