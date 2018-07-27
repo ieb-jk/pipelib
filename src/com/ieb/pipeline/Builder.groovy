@@ -1,9 +1,5 @@
 package com.ieb.pipeline;
 
-node('Worker1') { 
-    build() 
-}
-
-def build() {
+void build('Worker1') {
     echo "We are here"
 }
