@@ -1,5 +1,5 @@
 package com.ieb.pipeline;
 
-void build('Worker1') {
-    echo "We are here"
+void build() {
+    echo "We are in the library"
 }
