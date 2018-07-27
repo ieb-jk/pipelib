@@ -1,6 +1,9 @@
 package com.ieb.pipeline;
 
-def build() {
-    echo "Testing library"
+node('Worker1') { 
+    build() 
 }
 
+def build() {
+    echo "We are here"
+}
