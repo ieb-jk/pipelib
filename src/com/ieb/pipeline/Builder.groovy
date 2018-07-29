@@ -20,4 +20,19 @@ void build() {
 			"Security" : { echo 'RIPs security scanning' }
 		)
 	}
+
+	post {
+		always {
+			junit 'reports/*.xml'
+			publishHTML target: [
+				allowMissing: false,
+				alwaysLinkToLastBuild: false,
+				keepAll: true,
+				reportDir: 'reports/coverage',
+				reportFiles: 'index.html',
+				reportName: 'Coverage Report'
+			]
+		}
+	}
+
 }
