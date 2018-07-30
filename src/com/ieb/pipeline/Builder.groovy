@@ -2,10 +2,10 @@ package com.ieb.pipeline;
 
 void build() {
     
-    stage("Checkout") {
+    // stage("Checkout") {
         //checkout([$class: 'GitSCM', branches: [[name: '*/feature/ALLB-4206-Jenkins-UT']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'iebjk', url: 'https://github.com/IEBTrading/allbeauty.com']]])
-        checkout scm
-    }
+        //checkout scm
+    // } 
 	
 	stage("UnitTesting") {
 		echo 'PhpUnit - component testing with mock api stubs'
