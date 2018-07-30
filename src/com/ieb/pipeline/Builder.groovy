@@ -1,15 +1,16 @@
 package com.ieb.pipeline;
 
 void build() {
-	
-	stage("Build Application") {
-		echo "We are again in the library"
-	}
+    
+    stage("Checkout") {
+        //checkout([$class: 'GitSCM', branches: [[name: '*/feature/ALLB-4206-Jenkins-UT']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'iebjk', url: 'https://github.com/IEBTrading/allbeauty.com']]])
+        checkout scm
+    }
 	
 	stage("UnitTesting") {
 		echo 'PhpUnit - component testing with mock api stubs'
-		sh "echo 'running composer install'"
-		sh "echo 'now we would run ./vendor/bin/phpunit --log-junit reports/phpunit.xml --coverage-clover reports/coverage.xml --coverage-html reports/coverage'"
+		sh "composer install"
+		sh "./vendor/bin/phpunit --log-junit reports/phpunit.xml --coverage-clover reports/coverage.xml --coverage-html reports/coverage"
 	}
 	
 	stage('ParallelTesting') {
@@ -21,18 +22,7 @@ void build() {
 		)
 	}
 
-	post {
-		always {
-			junit 'reports/*.xml'
-			publishHTML target: [
-				allowMissing: false,
-				alwaysLinkToLastBuild: false,
-				keepAll: true,
-				reportDir: 'reports/coverage',
-				reportFiles: 'index.html',
-				reportName: 'Coverage Report'
-			]
-		}
-	}
-
+    stage('CaptureResults')	{
+	    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports/coverage', reportFiles: 'index.html', reportName: 'Coverage', reportTitles: ''])
+    }
 }
